@@ -91,11 +91,12 @@ select.state{
 .terr-row-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:#173c3e;margin:0 2px 8px}
 .terr-row-sub{padding-left:18px;border-left:3px solid #d9e2dd;margin-left:4px}
 .terr-row-sub .terr-row-title{font-size:13px;color:#4b5a56}
+.federalized-breakdown-toggle{margin-left:auto;display:inline-flex;align-items:center;gap:6px;border:1px solid #cfdad5;background:#f7faf8;color:#23523e;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer;transition:.18s ease}.federalized-breakdown-toggle:hover{background:#edf4f0;border-color:#b8cbc2}.federalized-breakdown-toggle[aria-expanded='true']{background:#e9f1ed}.federalized-breakdown-toggle .chev{font-size:12px;transition:transform .18s ease}.federalized-breakdown-toggle[aria-expanded='true'] .chev{transform:rotate(180deg)}
+.federalized-breakdown-panel{display:none;margin-top:10px}.federalized-breakdown-panel.open{display:block}.federalized-breakdown-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:0 0 9px;padding:4px 2px}.federalized-breakdown-head strong{font-size:12px;color:#173c3e}.federalized-breakdown-head span{display:block;margin-top:2px;font-size:10.5px;line-height:1.35;color:#687873}.federalized-breakdown-cards{display:grid;grid-template-columns:1fr;gap:9px}.federalized-component-card{background:#f6faf8;border:1px solid #dce6e1;border-radius:10px;padding:10px 10px 9px;box-shadow:0 2px 7px rgba(20,50,40,.045)}.federalized-component-card.total{background:linear-gradient(135deg,#e9f2ed,#f8fbf9);border-color:#c9dbd2}.federalized-component-card.convenios{background:linear-gradient(135deg,#f0f7f3,#fbfcfb);border-color:#cdded5}.federalized-component-card.nd{background:#fafbfa;color:#6f7d77}.federalized-component-head{display:flex;align-items:flex-start;justify-content:space-between;gap:7px;min-height:34px}.federalized-label{display:flex;align-items:flex-start;gap:6px;min-width:0}.federalized-label-main{font-size:11.5px;line-height:1.25;color:#23433a}.federalized-component-card.total .federalized-label-main,.federalized-component-card.convenios .federalized-label-main{font-weight:800}.federalized-component-card.nd .federalized-label-main{color:#65736e}.federalized-component-head .t-info-btn{width:19px;height:19px;font-size:10px;flex:0 0 19px}.federalized-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}.federalized-metric{background:#fff;border:1px solid #e1e8e4;border-radius:7px;padding:6px 7px;min-width:0}.federalized-component-card.total .federalized-metric{background:rgba(255,255,255,.72)}.federalized-metric .mini-label{font-size:9px;font-weight:800;color:#5e6e68;line-height:1.1}.federalized-metric .mini-value{margin-top:3px;font-size:12.5px;font-weight:800;color:#173c3e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.federalized-metric .mini-value.red{color:#e00000}.federalized-component-note{margin-top:6px;font-size:9.7px;line-height:1.3;color:#6a7974}.federalized-table-note{margin-top:9px;padding:8px 10px;border:1px solid #e0e6e2;border-radius:7px;background:#fafcfb;font-size:10.5px;line-height:1.4;color:#62716c}.federalized-table-note b{color:#234d3e}
+@media (max-width:900px){.federalized-breakdown-toggle{font-size:10px;padding:4px 8px}.federalized-breakdown-head{padding:2px 0}.federalized-breakdown-cards{grid-template-columns:1fr}.federalized-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .terr-cards-sub{grid-template-columns:repeat(4,1fr)}
-.kpi.sub{height:78px;padding:9px 12px;border-radius:8px}
-.kpi.sub .label{font-size:12.5px;margin-bottom:4px}
-.kpi.sub .value{font-size:20px}
-.donut-subcaption{font-size:11.5px;color:#5b6b66;text-align:center;padding:4px 10px 0;line-height:1.3}
+.kpi.sub{height:78px;padding:9px 12px;border-radius:8px}.kpi.sub .label{font-size:12.5px;margin-bottom:4px}.kpi.sub .value{font-size:20px}.donut-subcaption{font-size:11.5px;color:#5b6b66;text-align:center;padding:4px 10px 0;line-height:1.3}
+.federalized-note{font-size:11.5px;color:#5b6b66;line-height:1.35;margin:7px 2px 0;padding:6px 8px;background:#f5f7f5;border:1px solid #e2e7e4;border-radius:6px;text-align:left}.federalized-note b{color:#173c3e}
 
 .tmodal-overlay{position:fixed;inset:0;background:rgba(10,20,18,.45);z-index:980;display:flex;align-items:center;justify-content:center;padding:20px}
 .tmodal{background:#fff;border-radius:12px;max-width:460px;width:100%;padding:24px 24px 20px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;max-height:85vh;max-height:85dvh;overflow:auto;-webkit-overflow-scrolling:touch}
@@ -246,6 +247,129 @@ tfoot td{padding:8px;background:#f2f6f3}
   .reconcile-row td{background:#f7f8f6 !important;color:#596561;font-style:italic}
   .reconcile-row td.var{color:#7a6423}
 
+
+/* Gráficos del detalle del Gasto Federalizado */
+.federalized-detail-charts{margin-top:10px;grid-template-columns:1.15fr .85fr;gap:12px}
+.fed-bar-chart{
+  height:330px;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(72px,1fr));
+  align-items:end;
+  gap:14px;
+  padding:78px 18px 28px;
+  border-top:1px solid #eef2f0;
+  overflow:visible
+}
+.fed-bar-group{
+  position:relative;
+  height:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:10px;
+  min-width:0;
+  overflow:visible
+}
+.fed-bar{
+  width:36px;
+  border-radius:4px 4px 0 0;
+  min-height:1px;
+  position:relative
+}
+.fed-bar.a{background:#2d7d5a}.fed-bar.b{background:#c8b58b}
+.fed-bar-value{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%) rotate(-90deg);
+  transform-origin:center center;
+  font-size:15px;
+  line-height:1;
+  font-weight:900;
+  color:#2f4b43;
+  white-space:nowrap;
+  margin:0;
+  z-index:3;
+  pointer-events:none
+}
+/* En Ramo 28 y 33 la cifra se coloca dentro de la barra; en Convenios y los demás
+   componentes se mantiene arriba de la barra para conservar legibilidad. */
+.fed-bar-value.middle{
+  bottom:50%;
+  transform:translate(-50%,50%) rotate(-90deg);
+}
+.fed-bar.a .fed-bar-value.middle{color:#fff}
+.fed-bar.b .fed-bar-value.middle{color:#183b3d}
+.fed-bar-value.top{
+  bottom:calc(100% + 7px);
+}
+.fed-bar-label{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-24px;
+  font-size:10px;
+  color:#32443e;
+  white-space:nowrap;
+  max-width:110px;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+.fed-bar-group.empty{opacity:.45}
+.fed-chart-legend{margin-bottom:4px}
+.federalized-detail-charts .donut-card-body{min-height:280px}
+.federalized-detail-charts .donut-total{margin-top:2px}
+@media (max-width:900px){
+  .federalized-detail-charts{grid-template-columns:1fr}
+  .fed-bar-chart{height:300px;padding:72px 14px 28px;gap:12px}
+  .fed-bar{width:32px}
+  .fed-bar-group{gap:8px}
+  .fed-bar-value{font-size:14px}
+}
+
+/* Tabla de detalle del Gasto Federalizado: mismo lenguaje visual que "Detalle por Ramo" */
+.federalized-detail-card{margin-top:14px}
+.federalized-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.federalized-detail-subtitle{font-size:12px;line-height:1.4;color:#6b7873;margin-top:-4px;margin-bottom:8px}
+.federalized-detail-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;min-width:760px}
+.federalized-detail-table th{background:var(--green-dark);color:#fff;padding:10px 9px;border-right:1px solid rgba(255,255,255,.5);text-align:center;font-size:14px;cursor:default;user-select:none;white-space:nowrap}
+.federalized-detail-table td{padding:7px 9px;border-right:1px solid #dfe4e2;border-bottom:1px solid #dfe4e2;text-align:center;background:#fff;color:inherit;vertical-align:middle;font-size:14px}
+.federalized-detail-table td:first-child{text-align:left}
+.federalized-detail-table tr.fed-main td:first-child{font-weight:800}
+.federalized-detail-table tr.fed-total td{background:linear-gradient(#e5f2ec,#d7e9df);font-weight:900;border-top:2px solid #b8cec3}
+.federalized-detail-table tr.fed-convenios td{background:#f7faf8}
+.federalized-detail-table tr.fed-nd td{color:#6a7973;background:#fafbfa}
+.fed-detail-label{display:flex;align-items:center;gap:7px;min-width:220px}
+.fed-detail-label .code{display:inline-flex;align-items:center;justify-content:center;min-width:36px;padding:2px 5px;border-radius:5px;background:#eaf1ed;color:#234d3e;font-weight:800;font-size:10px}
+.fed-detail-toggle{border:1px solid #c9d8d0;background:#f7faf8;color:#174d36;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:800;cursor:pointer;white-space:nowrap}
+.fed-detail-toggle:hover{background:#edf4ef}
+.fed-detail-info{width:19px!important;height:19px!important;font-size:10px!important;flex:0 0 19px}
+.fed-convenios-subwrap{padding:6px 0 9px 38px;background:#fbfcfb}
+.fed-convenios-subtable{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+.fed-convenios-subtable th{font-size:12px;padding:8px 9px;background:var(--green-dark);color:#fff;text-align:center;border-right:1px solid rgba(255,255,255,.5)}
+.fed-convenios-subtable th:first-child{text-align:left}
+.fed-convenios-subtable td{font-size:13px;padding:7px 9px;border-right:1px solid #dfe4e2;border-bottom:1px solid #dfe4e2;text-align:right;background:#fff}
+.fed-convenios-subtable td:first-child{text-align:left}
+.fed-conv-total td{font-weight:900;background:linear-gradient(#e5f2ec,#d7e9df);border-top:2px solid #b8cec3}
+.fed-real-neg{color:var(--red);font-weight:800}.fed-real-pos{color:#000;font-weight:800}
+@media (max-width:900px){.federalized-detail-subtitle{font-size:11px}.federalized-detail-table{min-width:680px}.fed-convenios-subwrap{padding-left:8px}.fed-detail-label{min-width:180px}}
+
+
+/* ---- Secciones desplegables de análisis ---- */
+.collapsible-section{margin-top:14px}
+.collapsible-section-toggle{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid #cfdad5;background:#f7faf8;color:#173f33;border-radius:9px;
+  padding:11px 14px;font-size:14px;font-weight:800;cursor:pointer;text-align:left;
+  box-shadow:0 1px 2px rgba(18,49,44,.05)
+}
+.collapsible-section-toggle:hover{background:#eef5f1}
+.collapsible-section-toggle .label-wrap{display:flex;align-items:center;gap:8px;min-width:0}
+.collapsible-section-toggle .chev{font-size:15px;line-height:1;transition:transform .15s ease}
+.collapsible-section-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.collapsible-section-panel[hidden]{display:none!important}
+.collapsible-section-panel{margin-top:8px}
+.collapsible-section-panel .card:first-child{margin-top:0}
+
 </style>
 </head>
 <body>
@@ -351,20 +475,94 @@ tfoot td{padding:8px;background:#f2f6f3}
         </section>
 
         <section class="terr-row terr-row-sub" id="rowFedZ">
-          <div class="terr-row-title">Gasto federalizado<button class="t-info-btn" data-comp="fedz" type="button" aria-label="Más información">ⓘ</button></div>
+          <div class="terr-row-title">
+            <span>Gasto federalizado</span>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
+              <button class="t-info-btn" data-comp="fedz" type="button" aria-label="Más información">ⓘ</button>
+              <button id="fedzBreakdownToggle" class="federalized-breakdown-toggle" type="button" aria-expanded="false" aria-controls="fedzBreakdownPanel">Desagregar <span class="chev">⌄</span></button>
+            </div>
+          </div>
           <div class="kpi-grid terr-cards-sub">
-            <div class="kpi sub">
-              <div><div class="label">PEF 2026 (mdp)</div><div id="fzP26" class="value">$—</div></div>
+            <div class="kpi sub"><div><div class="label">PEF 2026 (mdp)</div><div id="fzP26" class="value">$—</div></div></div>
+            <div class="kpi sub beige"><div><div class="label">PPEF 2027 (mdp)</div><div id="fzP27" class="value">$—</div></div></div>
+            <div class="kpi sub"><div><div class="label">Variación nominal</div><div id="fzVnAbs" class="value">+$—</div><div id="fzVn" class="value red">—</div></div></div>
+            <div class="kpi sub"><div><div class="label">Variación real</div><div id="fzVr" class="value red">—</div></div></div>
+          </div>
+
+          <div id="fedzBreakdownPanel" class="federalized-breakdown-panel" aria-hidden="true">
+            <div class="federalized-breakdown-head">
+              <div><strong>Desglose del gasto federalizado</strong><span>Consulta cada componente como una tarjeta. Abre ⓘ para conocer qué es, dónde identificarlo y cómo lo calcula el simulador.</span></div>
             </div>
-            <div class="kpi sub beige">
-              <div><div class="label">PPEF 2027 (mdp)</div><div id="fzP27" class="value">$—</div></div>
+            <div class="federalized-breakdown-cards" aria-label="Desglose del gasto federalizado">
+              <article class="federalized-component-card" data-fed-component="ramo28">
+                <div class="federalized-component-head">
+                  <div class="federalized-label"><span class="federalized-label-main"><strong>Ramo 28</strong> · Participaciones Federales</span></div>
+                  <button class="t-info-btn" data-comp="ramo28" type="button" aria-label="Explicación de Ramo 28">ⓘ</button>
+                </div>
+                <div class="federalized-metrics">
+                  <div class="federalized-metric"><div class="mini-label">PEF 2026</div><div id="fb28_26" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">PPEF 2027</div><div id="fb28_27" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación abs.</div><div id="fb28_abs" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación real</div><div id="fb28_real" class="mini-value red">—</div></div>
+                </div>
+              </article>
+
+              <article class="federalized-component-card" data-fed-component="ramo33">
+                <div class="federalized-component-head">
+                  <div class="federalized-label"><span class="federalized-label-main"><strong>Ramo 33</strong> · Aportaciones Federales</span></div>
+                  <button class="t-info-btn" data-comp="ramo33" type="button" aria-label="Explicación de Ramo 33">ⓘ</button>
+                </div>
+                <div class="federalized-metrics">
+                  <div class="federalized-metric"><div class="mini-label">PEF 2026</div><div id="fb33_26" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">PPEF 2027</div><div id="fb33_27" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación abs.</div><div id="fb33_abs" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación real</div><div id="fb33_real" class="mini-value red">—</div></div>
+                </div>
+              </article>
+
+              <article class="federalized-component-card convenios" data-fed-component="convenios">
+                <div class="federalized-component-head">
+                  <div class="federalized-label"><span class="federalized-label-main">Convenios de Descentralización</span></div>
+                  <button class="t-info-btn" data-comp="convenios" type="button" aria-label="Explicación de Convenios de Descentralización">ⓘ</button>
+                </div>
+                <div class="federalized-metrics">
+                  <div class="federalized-metric"><div class="mini-label">PEF 2026</div><div id="fbConv_26" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">PPEF 2027</div><div id="fbConv_27" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación abs.</div><div id="fbConv_abs" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación real</div><div id="fbConv_real" class="mini-value red">—</div></div>
+                </div>
+                <div class="federalized-component-note">Componente del Gasto Federalizado identificado mediante CAPÍTULO 4000 y PARTIDA GENÉRICA 438.</div>
+              </article>
+
+              <article class="federalized-component-card" data-fed-component="ramo23">
+                <div class="federalized-component-head">
+                  <div class="federalized-label"><span class="federalized-label-main">Gasto Federalizado identificado en el <strong>Ramo 23</strong></span></div>
+                  <button class="t-info-btn" data-comp="ramo23" type="button" aria-label="Explicación del Ramo 23 federalizado">ⓘ</button>
+                </div>
+                <div class="federalized-metrics">
+                  <div class="federalized-metric"><div class="mini-label">PEF 2026</div><div id="fb23_26" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">PPEF 2027</div><div id="fb23_27" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación abs.</div><div id="fb23_abs" class="mini-value">—</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación real</div><div id="fb23_real" class="mini-value red">—</div></div>
+                </div>
+                <div class="federalized-component-note">Recursos identificados como gasto federalizado dentro del Ramo 23.</div>
+              </article>
+
+              <article class="federalized-component-card nd" data-fed-component="saludPublica">
+                <div class="federalized-component-head">
+                  <div class="federalized-label"><span class="federalized-label-main">Salud Pública</span></div>
+                  <button class="t-info-btn" data-comp="saludPublica" type="button" aria-label="Explicación de Salud Pública">ⓘ</button>
+                </div>
+                <div class="federalized-metrics">
+                  <div class="federalized-metric"><div class="mini-label">PEF 2026</div><div id="fbHealth_26" class="mini-value">n.d.</div></div>
+                  <div class="federalized-metric"><div class="mini-label">PPEF 2027</div><div id="fbHealth_27" class="mini-value">n.d.</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación abs.</div><div id="fbHealth_abs" class="mini-value">n.a.</div></div>
+                  <div class="federalized-metric"><div class="mini-label">Variación real</div><div id="fbHealth_real" class="mini-value">n.a.</div></div>
+                </div>
+                <div class="federalized-component-note">En la vista estatal se mantiene como n.d. porque no se distribuye territorialmente a una entidad específica.</div>
+              </article>
             </div>
-            <div class="kpi sub">
-              <div><div class="label">Variación nominal</div><div id="fzVnAbs" class="value">+$—</div><div id="fzVn" class="value red">—</div></div>
-            </div>
-            <div class="kpi sub">
-              <div><div class="label">Variación real</div><div id="fzVr" class="value red">—</div></div>
-            </div>
+            <div id="fedzBreakdownNote" class="federalized-table-note"></div>
           </div>
         </section>
 
@@ -387,54 +585,124 @@ tfoot td{padding:8px;background:#f2f6f3}
         </section>
       </div>
 
-      <section class="charts">
-        <div class="card">
-          <div id="chartTitle" class="card-title">Comparativo por Ramo (mdp)</div>
-          <div class="card-body">
-            <div class="legend">
-              <span><i class="dot a"></i>PEF 2026</span>
-              <span><i class="dot b"></i>PPEF 2027</span>
-            </div>
-            <div class="chart-canvas">
-              <div id="ylabels" class="ylabels"></div>
-              <div id="bars" class="bar-grid"></div>
-            </div>
-            <div id="barNav" class="bar-nav">
-              <input id="barSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Desplazar ramos">
-              <span id="barNavLabel"></span>
-            </div>
-            <div id="chartReconcileNote" class="chart-reconcile-note" style="display:none"></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div id="donutTitle" class="card-title">Distribución PPEF 2027 por Ramo</div>
-          <div id="donutSubcaption" class="donut-subcaption"></div>
-          <div class="card-body donut-card-body">
-            <div class="donut-total">
-              <div class="donut-total-label">Total PPEF 2027</div>
-              <div id="donutTotal" class="donut-total-value">$— mdp</div>
-            </div>
-            <div class="donut-wrap">
-              <div id="donut" class="donut">
-                <div id="donutCenter" class="donut-center"></div>
+      <section class="collapsible-section" id="comparativoRamoSection">
+        <button id="comparativoRamoToggle" class="collapsible-section-toggle" type="button" aria-expanded="false" aria-controls="comparativoRamoPanel">
+          <span class="label-wrap"><span id="comparativoRamoToggleLabel">Comparativo por Ramo</span></span>
+          <span class="chev">⌄</span>
+        </button>
+        <div id="comparativoRamoPanel" class="collapsible-section-panel" hidden>
+          <section class="charts">
+            <div class="card">
+              <div id="chartTitle" class="card-title">Comparativo por Ramo (mdp)</div>
+              <div class="card-body">
+                <div class="legend">
+                  <span><i class="dot a"></i>PEF 2026</span>
+                  <span><i class="dot b"></i>PPEF 2027</span>
+                </div>
+                <div class="chart-canvas">
+                  <div id="ylabels" class="ylabels"></div>
+                  <div id="bars" class="bar-grid"></div>
+                </div>
+                <div id="barNav" class="bar-nav">
+                  <input id="barSlider" type="range" min="0" max="0" value="0" step="1" aria-label="Desplazar ramos">
+                  <span id="barNavLabel"></span>
+                </div>
+                <div id="chartReconcileNote" class="chart-reconcile-note" style="display:none"></div>
               </div>
-              <div id="donutLegend" class="donut-legend"></div>
             </div>
-          </div>
+
+            <div class="card">
+              <div id="donutTitle" class="card-title">Distribución PPEF 2027 por Ramo</div>
+              <div id="donutSubcaption" class="donut-subcaption"></div>
+              <div class="card-body donut-card-body">
+                <div class="donut-total">
+                  <div class="donut-total-label">Total PPEF 2027</div>
+                  <div id="donutTotal" class="donut-total-value">$— mdp</div>
+                </div>
+                <div class="donut-wrap">
+                  <div id="donut" class="donut">
+                    <div id="donutCenter" class="donut-center"></div>
+                  </div>
+                  <div id="donutLegend" class="donut-legend"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card table-card">
+            <div id="tableTitle" class="card-title">Detalle por Ramo</div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr id="tableHeadRow">
+                  </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+              </table>
+            </div>
+          </section>
         </div>
       </section>
 
-      <section class="card table-card">
-        <div id="tableTitle" class="card-title">Detalle por Ramo</div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr id="tableHeadRow">
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
+      <section class="collapsible-section" id="detalleFedSection">
+        <button id="detalleFedToggle" class="collapsible-section-toggle" type="button" aria-expanded="false" aria-controls="federalizedDetailPanel">
+          <span class="label-wrap"><span>Detalle del Gasto Federalizado</span></span>
+          <span class="chev">⌄</span>
+        </button>
+        <div id="federalizedDetailPanel" class="collapsible-section-panel" hidden>
+          <section class="card federalized-detail-card" id="federalizedDetailCard">
+            <div class="federalized-detail-head">
+              <div>
+                <div id="federalizedDetailTitle" class="card-title">Detalle del Gasto Federalizado</div>
+                <div class="federalized-detail-subtitle">Componentes del Gasto Federalizado y su composición. En Convenios de Descentralización puedes consultar los Ramos presupuestarios que integran este componente.</div>
+              </div>
+            </div>
+
+            <section class="charts federalized-detail-charts" aria-label="Gráficos del Gasto Federalizado">
+              <div class="card">
+                <div id="fedChartTitle" class="card-title">Comparativo del Gasto Federalizado</div>
+                <div class="card-body">
+                  <div class="legend fed-chart-legend">
+                    <span><i class="dot a"></i>PEF 2026</span>
+                    <span><i class="dot b"></i>PPEF 2027</span>
+                  </div>
+                  <div id="fedBarChart" class="fed-bar-chart"></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div id="fedDonutTitle" class="card-title">Distribución PPEF 2027 del Gasto Federalizado</div>
+                <div id="fedDonutSubcaption" class="donut-subcaption"></div>
+                <div class="card-body donut-card-body">
+                  <div class="donut-total">
+                    <div class="donut-total-label">Total PPEF 2027</div>
+                    <div id="fedDonutTotal" class="donut-total-value">$— mdp</div>
+                  </div>
+                  <div class="donut-wrap">
+                    <div id="fedDonut" class="donut">
+                      <div id="fedDonutCenter" class="donut-center"></div>
+                    </div>
+                    <div id="fedDonutLegend" class="donut-legend"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="table-wrap federalized-detail-wrap">
+              <table class="federalized-detail-table">
+                <thead>
+                  <tr>
+                    <th>Concepto</th>
+                    <th>PEF 2026<br>(mdp)</th>
+                    <th>PPEF 2027<br>(mdp)</th>
+                    <th>Variación<br>abs.</th>
+                    <th>Variación<br>real</th>
+                  </tr>
+                </thead>
+                <tbody id="federalizedDetailBody"></tbody>
+              </table>
+            </div>
+          </section>
         </div>
       </section>
     </main>
@@ -470,7 +738,7 @@ function esc(s){
   return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 let classificationMode='ramo'; // 'ramo' | 'funcional'
-let gastoType='programable'; // 'programable' | 'noProgramable' | 'total'
+let gastoType='total'; // 'programable' | 'noProgramable' | 'total' — valor inicial del simulador
 
 const GASTO_TYPE_LABEL={
   programable:'Programable',
@@ -531,6 +799,14 @@ const NATIONAL_CONTROLS={
   2026:{total:10193683.7,programable:7094708.8,noProgramable:3098974.9},
   2027:{total:10636488.1,programable:7432529.7,noProgramable:3203958.4}
 };
+
+// Componentes de Gasto Federalizado reconstruidos desde las bases primarias PEF 2026 / PPEF 2027.
+// Convenios: CAPITULO 4000 + PARTIDA_GENERICA 438, excluyendo Ramo 23 para evitar doble conteo.
+// Ramo 23 federalizado identificado: PP 28, 31, 93 y 116.
+// Salud Pública: Ramo 56, PP 13 en 2026; PP 13, 14 y 89 en 2027.
+// Para entidades federativas, Salud Pública se mantiene como no disponible (n.d.) y no se atribuye territorialmente.
+const FEDERAL_COMPONENTS={"Nacional":{"convenios":{"p26":138690322956.0,"p27":163015879682.0},"conveniosByRamo":{"p26":{"04":746393565.0,"08":2193650664.0,"09":3120939009.0,"11":118557366712.0,"12":8266803569.0,"14":318032653.0,"16":3226734780.0,"36":1166106569.0,"48":105432837.0,"54":713405434.0,"56":275457164.0},"p27":{"04":746393565.0,"08":2193650664.0,"09":3000000000.0,"11":145988608388.0,"12":5705958870.0,"14":232721306.0,"16":2417613211.0,"27":286000.0,"36":1201089767.0,"48":147663515.0,"54":1106437232.0,"56":275457164.0}},"ramo23":{"p26":13510743728.0,"p27":13987247165.0},"saludPublica":{"p26":88850402777.0,"p27":91717594762.0}},"Aguascalientes":{"convenios":{"p26":1600042483.0,"p27":1526278825.0},"conveniosByRamo":{"p26":{"08":26825769.0,"11":1509267960.0,"16":48819305.0,"48":1588137.0,"54":13541312.0},"p27":{"08":27852195.0,"11":1437243970.0,"12":23580663.0,"16":37601997.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Baja California":{"convenios":{"p26":3365352810.0,"p27":3724381267.0},"conveniosByRamo":{"p26":{"08":36036574.0,"11":3243694956.0,"16":70491814.0,"48":1588137.0,"54":13541329.0},"p27":{"08":40462410.0,"11":3516376511.0,"12":107283072.0,"16":60259274.0}},"ramo23":{"p26":4889471114.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Baja California Sur":{"convenios":{"p26":1183604865.0,"p27":1125879835.0},"conveniosByRamo":{"p26":{"08":34427174.0,"11":1081117311.0,"16":52930914.0,"48":1588137.0,"54":13541329.0},"p27":{"08":35424062.0,"11":1042662726.0,"12":11632597.0,"16":36160450.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Campeche":{"convenios":{"p26":2073888855.0,"p27":1984835520.0},"conveniosByRamo":{"p26":{"08":60360020.0,"11":1875698537.0,"12":40645932.0,"16":82054900.0,"48":1588137.0,"54":13541329.0},"p27":{"08":59776502.0,"11":1827147472.0,"12":41710898.0,"16":56200648.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Chiapas":{"convenios":{"p26":4697022383.0,"p27":5100734739.0},"conveniosByRamo":{"p26":{"08":119918230.0,"11":4165499613.0,"12":293567753.0,"16":102907321.0,"48":1588137.0,"54":13541329.0},"p27":{"08":118999486.0,"11":4770700755.0,"12":134149919.0,"16":76884579.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Chihuahua":{"convenios":{"p26":4028770323.0,"p27":4023228058.0},"conveniosByRamo":{"p26":{"08":81123964.0,"11":3857263934.0,"16":75252959.0,"48":1588137.0,"54":13541329.0},"p27":{"08":82301658.0,"11":3820187191.0,"12":64335178.0,"16":56404031.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Ciudad de México":{"convenios":{"p26":6009750646.0,"p27":9495052890.0},"conveniosByRamo":{"p26":{"08":4259028.0,"09":3120939009.0,"11":1846850733.0,"12":819703152.0,"16":199685751.0,"48":1588137.0,"54":16724836.0},"p27":{"08":4240872.0,"09":3000000000.0,"11":6333017876.0,"12":45160222.0,"16":112347920.0,"27":286000.0}},"ramo23":{"p26":1488834560.0,"p27":1348953382.0},"saludPublica":{"p26":null,"p27":null}},"Coahuila":{"convenios":{"p26":2856805550.0,"p27":2681184820.0},"conveniosByRamo":{"p26":{"08":54773484.0,"11":2725367317.0,"16":61535283.0,"48":1588137.0,"54":13541329.0},"p27":{"08":58028923.0,"11":2514937275.0,"12":59014335.0,"16":49204287.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Colima":{"convenios":{"p26":2219315118.0,"p27":2161600448.0},"conveniosByRamo":{"p26":{"08":31953711.0,"11":2141885403.0,"16":30346538.0,"48":1588137.0,"54":13541329.0},"p27":{"08":33187103.0,"11":2084605572.0,"12":11467313.0,"16":32340460.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Durango":{"convenios":{"p26":2804929422.0,"p27":2702002705.0},"conveniosByRamo":{"p26":{"08":62339551.0,"11":2631362186.0,"16":96098219.0,"48":1588137.0,"54":13541329.0},"p27":{"08":62253779.0,"11":2558937145.0,"12":16326444.0,"16":64485337.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Estado de México":{"convenios":{"p26":5884323077.0,"p27":5061898292.0},"conveniosByRamo":{"p26":{"08":52064559.0,"11":5562753533.0,"16":254375519.0,"48":1588137.0,"54":13541329.0},"p27":{"08":52098650.0,"11":4788260793.0,"12":22894626.0,"16":198644223.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Guanajuato":{"convenios":{"p26":4029131764.0,"p27":3652102441.0},"conveniosByRamo":{"p26":{"08":73109535.0,"11":3738426332.0,"16":202466431.0,"48":1588137.0,"54":13541329.0},"p27":{"08":71697359.0,"11":3455165082.0,"12":38472678.0,"16":86767322.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Guerrero":{"convenios":{"p26":3684331332.0,"p27":3833017909.0},"conveniosByRamo":{"p26":{"08":74870767.0,"11":3485617814.0,"16":108713285.0,"48":1588137.0,"54":13541329.0},"p27":{"08":75711572.0,"11":3672286223.0,"12":10419687.0,"16":74600427.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Hidalgo":{"convenios":{"p26":3666528123.0,"p27":3512048128.0},"conveniosByRamo":{"p26":{"08":58721899.0,"11":3463175006.0,"16":129501752.0,"48":1588137.0,"54":13541329.0},"p27":{"08":58526605.0,"11":3244944610.0,"12":121510343.0,"16":87066570.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Jalisco":{"convenios":{"p26":9101502855.0,"p27":9469742008.0},"conveniosByRamo":{"p26":{"08":116192238.0,"11":8830843661.0,"16":139337490.0,"48":1588137.0,"54":13541329.0},"p27":{"08":113299205.0,"11":9228003482.0,"12":32720309.0,"16":95719012.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Michoacán":{"convenios":{"p26":4462280865.0,"p27":4705743039.0},"conveniosByRamo":{"p26":{"08":129245228.0,"11":4224235350.0,"16":93670821.0,"48":1588137.0,"54":13541329.0},"p27":{"08":125217028.0,"11":4395952439.0,"12":51268275.0,"16":133305297.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Morelos":{"convenios":{"p26":2056959985.0,"p27":2131616815.0},"conveniosByRamo":{"p26":{"08":41975923.0,"11":1929251326.0,"16":70603270.0,"48":1588137.0,"54":13541329.0},"p27":{"08":43564240.0,"11":1935967898.0,"12":79500996.0,"16":72583681.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Nayarit":{"convenios":{"p26":2329458317.0,"p27":2351115947.0},"conveniosByRamo":{"p26":{"08":74341248.0,"11":2223549729.0,"16":16437874.0,"48":1588137.0,"54":13541329.0},"p27":{"08":73756945.0,"11":2228696145.0,"12":10545450.0,"16":38117407.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Nuevo León":{"convenios":{"p26":7581381844.0,"p27":7679692540.0},"conveniosByRamo":{"p26":{"08":54872277.0,"11":7414850087.0,"16":96530014.0,"48":1588137.0,"54":13541329.0},"p27":{"08":55299300.0,"11":7518724005.0,"12":25889195.0,"16":79780040.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Oaxaca":{"convenios":{"p26":2976233799.0,"p27":3400774975.0},"conveniosByRamo":{"p26":{"08":58350106.0,"11":2751472253.0,"16":151281974.0,"48":1588137.0,"54":13541329.0},"p27":{"08":58902593.0,"11":3231281387.0,"12":15247248.0,"16":95343747.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Puebla":{"convenios":{"p26":7043125247.0,"p27":6636561587.0},"conveniosByRamo":{"p26":{"08":75580069.0,"11":6952415712.0,"48":1588137.0,"54":13541329.0},"p27":{"08":75530818.0,"11":6421519199.0,"12":96130555.0,"16":43381015.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Querétaro":{"convenios":{"p26":2766096603.0,"p27":2607753350.0},"conveniosByRamo":{"p26":{"08":30558491.0,"11":2664994899.0,"16":55413747.0,"48":1588137.0,"54":13541329.0},"p27":{"08":30421828.0,"11":2524235835.0,"12":10564410.0,"16":42531277.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Quintana Roo":{"convenios":{"p26":1335330135.0,"p27":1383938493.0},"conveniosByRamo":{"p26":{"08":34372956.0,"11":1184427743.0,"16":101399970.0,"48":1588137.0,"54":13541329.0},"p27":{"08":37846012.0,"11":1192156871.0,"12":67968172.0,"16":85967438.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"San Luis Potosí":{"convenios":{"p26":3569877571.0,"p27":3583666985.0},"conveniosByRamo":{"p26":{"08":64775409.0,"11":3402799263.0,"16":87173433.0,"48":1588137.0,"54":13541329.0},"p27":{"08":67355566.0,"11":3439933151.0,"12":10958518.0,"16":65419750.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Sinaloa":{"convenios":{"p26":7170627916.0,"p27":7449391929.0},"conveniosByRamo":{"p26":{"08":241362601.0,"11":6845050045.0,"16":69085804.0,"48":1588137.0,"54":13541329.0},"p27":{"08":231620828.0,"11":7127665847.0,"12":38579502.0,"16":51525752.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Sonora":{"convenios":{"p26":4223881279.0,"p27":4296899354.0},"conveniosByRamo":{"p26":{"08":102486732.0,"11":4027397521.0,"16":78867560.0,"48":1588137.0,"54":13541329.0},"p27":{"08":102291244.0,"11":4102335268.0,"12":22172212.0,"16":70100630.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Tabasco":{"convenios":{"p26":3665317497.0,"p27":3786660324.0},"conveniosByRamo":{"p26":{"08":64224225.0,"11":3426439023.0,"12":47658786.0,"16":111865997.0,"48":1588137.0,"54":13541329.0},"p27":{"08":63590148.0,"11":3577117000.0,"12":86865263.0,"16":59087913.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Tamaulipas":{"convenios":{"p26":3803364850.0,"p27":3684217478.0},"conveniosByRamo":{"p26":{"08":91622814.0,"11":3551444049.0,"16":145168521.0,"48":1588137.0,"54":13541329.0},"p27":{"08":91183034.0,"11":3415869386.0,"12":38794953.0,"16":138370105.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Tlaxcala":{"convenios":{"p26":1594553825.0,"p27":1723080644.0},"conveniosByRamo":{"p26":{"08":15555561.0,"11":1543234355.0,"16":20634443.0,"48":1588137.0,"54":13541329.0},"p27":{"08":16546599.0,"11":1619485493.0,"12":69786422.0,"16":17262130.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Veracruz":{"convenios":{"p26":5601765620.0,"p27":5160964322.0},"conveniosByRamo":{"p26":{"08":117743639.0,"11":5210673372.0,"16":258219143.0,"48":1588137.0,"54":13541329.0},"p27":{"08":115194344.0,"11":4914190228.0,"12":24848540.0,"16":106731210.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Yucatán":{"convenios":{"p26":3584682304.0,"p27":3463094788.0},"conveniosByRamo":{"p26":{"08":58752451.0,"11":3396462472.0,"16":114337915.0,"48":1588137.0,"54":13541329.0},"p27":{"08":59849546.0,"11":3288592689.0,"12":25050842.0,"16":89601711.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"Zacatecas":{"convenios":{"p26":2953257490.0,"p27":2840423129.0},"conveniosByRamo":{"p26":{"08":50854431.0,"11":2833453545.0,"16":53820048.0,"48":1588137.0,"54":13541329.0},"p27":{"08":51620210.0,"11":2736885170.0,"12":11335248.0,"16":40582501.0}},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":null,"p27":null}},"No distribuible geográficamente":{"convenios":{"p26":14766828203.0,"p27":36076296098.0},"conveniosByRamo":{"p26":{"04":746393565.0,"11":4816391672.0,"12":7065227946.0,"14":318032653.0,"16":47706765.0,"36":1166106569.0,"48":54612453.0,"54":276899416.0,"56":275457164.0},"p27":{"04":746393565.0,"11":28023523694.0,"12":4279774785.0,"14":232721306.0,"16":63235070.0,"36":1201089767.0,"48":147663515.0,"54":1106437232.0,"56":275457164.0}},"ramo23":{"p26":7132438054.0,"p27":12638293783.0},"saludPublica":{"p26":88850402777.0,"p27":91717594762.0}}};
+const FEDERAL_FUNCTIONAL={"Nacional":{"1-7-4":{"convenios":{"p26":1166106569.0,"p27":1201089767.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-2-4":{"convenios":{"p26":276899416.0,"p27":266765373.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-3":{"convenios":{"p26":80909461757.0,"p27":85771010737.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-3-5":{"convenios":{"p26":0.0,"p27":0.0},"ramo23":{"p26":4889471114.0,"p27":5047253768.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-1-2":{"convenios":{"p26":318032653.0,"p27":232721306.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-7-3":{"convenios":{"p26":699512980.0,"p27":699512980.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-2":{"convenios":{"p26":287694876.0,"p27":327844876.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":88850402777.0,"p27":91717594762.0}},"2-2-3":{"convenios":{"p26":1412134425.0,"p27":1120375073.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-1":{"convenios":{"p26":2905142268.0,"p27":2578033901.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-1":{"convenios":{"p26":1412994553.0,"p27":1395064026.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-5":{"convenios":{"p26":503062047.0,"p27":503085792.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-5":{"convenios":{"p26":4387081859.0,"p27":2100600152.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":845423864.0,"p27":651293438.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-1":{"convenios":{"p26":2193650664.0,"p27":2193650664.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-3-2":{"convenios":{"p26":0.0,"p27":0.0},"ramo23":{"p26":8559234560.0,"p27":8849953382.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-6-8":{"convenios":{"p26":2339619524.0,"p27":2029177430.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-5-2":{"convenios":{"p26":0.0,"p27":0.0},"ramo23":{"p26":62038054.0,"p27":90040015.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":926866287.0,"p27":573322824.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-7":{"convenios":{"p26":46880585.0,"p27":46880585.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":1455027886.0,"p27":1501588778.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":32784672754.0,"p27":38634889180.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-4":{"convenios":{"p26":114869921.0,"p27":128729550.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-5-1":{"convenios":{"p26":3120939009.0,"p27":3000000000.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":436506018.0,"p27":839671859.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":105432837.0,"p27":147663515.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-2":{"convenios":{"p26":42310204.0,"p27":59000000.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":13621876.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"1-3-4":{"convenios":{"p26":0,"p27":286000.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-5-6":{"convenios":{"p26":0,"p27":17000000000.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Aguascalientes":{"2-5-3":{"convenios":{"p26":1074404951.0,"p27":946796078.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":27089622.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-5":{"convenios":{"p26":10803368.0,"p27":8230570.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":10926315.0,"p27":28342150.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":20249072.0,"p27":20897042.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":414613937.0,"p27":469550850.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541312.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":26825769.0,"p27":27852195.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":23580663.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":1029277.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Baja California":{"2-5-3":{"convenios":{"p26":2220652807.0,"p27":2208076455.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-3-5":{"convenios":{"p26":0.0,"p27":0},"ramo23":{"p26":4889471114.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-1-3":{"convenios":{"p26":22414497.0,"p27":16710756.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":48077317.0,"p27":35843245.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":40128686.0,"p27":41412804.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":982913463.0,"p27":1266887252.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":36036574.0,"p27":40462410.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":107283072.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":7092689.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":612584.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Baja California Sur":{"2-5-3":{"convenios":{"p26":743023810.0,"p27":622678865.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":14081504.0,"p27":10498232.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":12837235.0,"p27":6068626.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":26012175.0,"p27":19392945.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":11425825.0,"p27":11791451.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":326667676.0,"p27":408192410.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":34427174.0,"p27":35424062.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":11632597.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":200647.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Campeche":{"2-6-8":{"convenios":{"p26":40645932.0,"p27":41710898.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-3":{"convenios":{"p26":1196801416.0,"p27":1056531985.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":17107675.0,"p27":12754343.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":31486939.0,"p27":17525861.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":33460286.0,"p27":24945760.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":22595987.0,"p27":23319059.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":656301134.0,"p27":747296428.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":60360020.0,"p27":59776502.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-1-2":{"convenios":{"p26":0,"p27":974684.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Chiapas":{"2-6-8":{"convenios":{"p26":293567753.0,"p27":134149919.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-3":{"convenios":{"p26":1869061474.0,"p27":1771275590.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":36612951.0,"p27":27296177.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":66294370.0,"p27":49424666.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":32501956.0,"p27":33542019.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":2263936183.0,"p27":2965883146.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":119918230.0,"p27":118999486.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-5":{"convenios":{"p26":0,"p27":163736.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Chihuahua":{"2-5-3":{"convenios":{"p26":2910963167.0,"p27":2583725713.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":29155995.0,"p27":21736767.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":46096964.0,"p27":34366826.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":47552269.0,"p27":49073942.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":898748498.0,"p27":1187387536.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":81123964.0,"p27":82301658.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":64335178.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":35568.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":264870.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Ciudad de México":{"2-6-8":{"convenios":{"p26":819703152.0,"p27":45160222.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-3":{"convenios":{"p26":1009058617.0,"p27":5634377843.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":86211161.0,"p27":64273299.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":57779422.0,"p27":5416213.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":55695168.0,"p27":41523251.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-3-2":{"convenios":{"p26":0.0,"p27":0.0},"ramo23":{"p26":1488834560.0,"p27":1348953382.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-1":{"convenios":{"p26":25479874.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-5-2":{"convenios":{"p26":309250195.0,"p27":195554241.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-5":{"convenios":{"p26":503062047.0,"p27":503085792.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-5-1":{"convenios":{"p26":3120939009.0,"p27":3000000000.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":16724836.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":4259028.0,"p27":4240872.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-1-2":{"convenios":{"p26":0,"p27":1135157.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"1-3-4":{"convenios":{"p26":0,"p27":286000.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Coahuila":{"2-5-3":{"convenios":{"p26":1990930014.0,"p27":1578006491.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":17499074.0,"p27":13046144.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":20851846.0,"p27":18873426.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":23184363.0,"p27":17284717.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":33748732.0,"p27":34828691.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":700688571.0,"p27":902102093.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":54773484.0,"p27":58028923.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":59014335.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Colima":{"2-5-3":{"convenios":{"p26":1692639341.0,"p27":1721025360.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":7683521.0,"p27":5728322.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":12569674.0,"p27":19087214.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":10093343.0,"p27":7524924.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":36807470.0,"p27":37985309.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":412438592.0,"p27":325594903.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":31953711.0,"p27":33187103.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":11467313.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Durango":{"2-5-3":{"convenios":{"p26":1734342098.0,"p27":1514856333.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":24649664.0,"p27":18377147.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":24372985.0,"p27":11011781.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":47075570.0,"p27":35096409.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":32398143.0,"p27":33434884.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":864621945.0,"p27":1010645928.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":62339551.0,"p27":62253779.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":16326444.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Estado de México":{"2-5-3":{"convenios":{"p26":3523730968.0,"p27":2434694085.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":76586092.0,"p27":57097490.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":40566905.0,"p27":38138934.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":137222522.0,"p27":102303972.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":51539372.0,"p27":53188632.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1987483193.0,"p27":2300378076.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":52064559.0,"p27":52098650.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":22894626.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":1103827.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Guanajuato":{"2-5-3":{"convenios":{"p26":2446557635.0,"p27":2016717906.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":30079883.0,"p27":22425558.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":91461933.0,"p27":19515016.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":80924615.0,"p27":44636563.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":43131428.0,"p27":44511634.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1248737269.0,"p27":1393935542.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":73109535.0,"p27":71697359.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":38472678.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":190185.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Guerrero":{"2-5-3":{"convenios":{"p26":2344797454.0,"p27":2193933349.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":46921524.0,"p27":48423013.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1093898836.0,"p27":1429929861.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":108713285.0,"p27":10142175.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":74870767.0,"p27":75711572.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":10419687.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-2-3":{"convenios":{"p26":0,"p27":43162460.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-3":{"convenios":{"p26":0,"p27":21295792.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Hidalgo":{"2-5-3":{"convenios":{"p26":2075620566.0,"p27":1544512353.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":27037301.0,"p27":20157211.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":58709795.0,"p27":33308125.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":43754656.0,"p27":32620557.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":33032395.0,"p27":34089432.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1354522045.0,"p27":1666342825.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":58721899.0,"p27":58526605.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":121510343.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":980677.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Jalisco":{"2-5-3":{"convenios":{"p26":6884883907.0,"p27":6990653526.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":32466739.0,"p27":24205038.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":42831391.0,"p27":31618213.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":64039360.0,"p27":39895761.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":142340150.0,"p27":146895035.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1803619604.0,"p27":2090454921.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":116192238.0,"p27":113299205.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":32720309.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Michoacán":{"2-5-3":{"convenios":{"p26":2467311048.0,"p27":2209224139.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":31221678.0,"p27":23276803.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":62449143.0,"p27":46557921.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":47248548.0,"p27":48760502.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1709675754.0,"p27":2137967798.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":129245228.0,"p27":125217028.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":51268275.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":61957030.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":1513543.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Morelos":{"2-5-3":{"convenios":{"p26":1442577810.0,"p27":1384402372.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":23894291.0,"p27":17813992.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":46708979.0,"p27":34823104.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":29608134.0,"p27":30555594.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":457065382.0,"p27":521009932.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":41975923.0,"p27":43564240.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":79500996.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":19525763.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":420822.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Nayarit":{"2-5-3":{"convenios":{"p26":1682507377.0,"p27":1600884035.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":34238014.0,"p27":35333630.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":506804338.0,"p27":592478480.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":16437874.0,"p27":10280770.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":74341248.0,"p27":73756945.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":10545450.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-2-3":{"convenios":{"p26":0,"p27":19988917.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-3":{"convenios":{"p26":0,"p27":7847720.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Nuevo León":{"2-5-3":{"convenios":{"p26":6018758730.0,"p27":6051738395.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":30861375.0,"p27":15160465.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":20303776.0,"p27":30798555.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":45364863.0,"p27":33821020.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":129428179.0,"p27":133569881.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1266663178.0,"p27":1333415729.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":54872277.0,"p27":55299300.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":25889195.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Oaxaca":{"2-5-3":{"convenios":{"p26":1361415170.0,"p27":1332725732.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":36437841.0,"p27":27165627.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":47448948.0,"p27":17932759.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":67395185.0,"p27":50245361.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":28502928.0,"p27":29415022.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1361554155.0,"p27":1869140633.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":58350106.0,"p27":58902593.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":15247248.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Puebla":{"2-5-3":{"convenios":{"p26":5497411990.0,"p27":4804464851.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":101335258.0,"p27":104577986.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1353668464.0,"p27":1512476362.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":75580069.0,"p27":75530818.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":96130555.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":15535609.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":378386.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-2-3":{"convenios":{"p26":0,"p27":15695440.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-3":{"convenios":{"p26":0,"p27":11771580.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Querétaro":{"2-5-3":{"convenios":{"p26":1847359965.0,"p27":1579781749.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":17663523.0,"p27":13168746.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":37750224.0,"p27":28144053.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":33786700.0,"p27":34867874.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":783848234.0,"p27":909586212.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":30558491.0,"p27":30421828.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":10564410.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":14681.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":1203797.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Quintana Roo":{"2-5-3":{"convenios":{"p26":556269288.0,"p27":397366906.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":17966950.0,"p27":13394961.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":54981767.0,"p27":50806499.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":28451253.0,"p27":21211359.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":7192369.0,"p27":7422525.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":620966086.0,"p27":787367440.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":34372956.0,"p27":37846012.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":67968172.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":554619.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"San Luis Potosí":{"2-5-3":{"convenios":{"p26":2689973880.0,"p27":2552181406.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":26956523.0,"p27":20096988.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":60216910.0,"p27":44893717.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":47612185.0,"p27":49135775.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":665213198.0,"p27":838615970.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":64775409.0,"p27":67355566.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":10958518.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":50659.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":378386.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Sinaloa":{"2-5-3":{"convenios":{"p26":5362837237.0,"p27":5406125402.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":26707603.0,"p27":19911410.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":42378201.0,"p27":31594363.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":108073817.0,"p27":111532179.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1374138991.0,"p27":1610008266.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":241362601.0,"p27":231620828.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":38579502.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":19979.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Sonora":{"2-5-3":{"convenios":{"p26":2961764926.0,"p27":2700722320.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":24796112.0,"p27":18486330.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":54071448.0,"p27":40312070.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":49556808.0,"p27":51142626.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1016075787.0,"p27":1350470322.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":102486732.0,"p27":102291244.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":22172212.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":11075199.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":227031.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Tabasco":{"2-6-8":{"convenios":{"p26":47658786.0,"p27":86865263.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-3":{"convenios":{"p26":2035906145.0,"p27":1618890457.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":28351688.0,"p27":21137130.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":40919082.0,"p27":6005426.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":42595227.0,"p27":31756164.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":29705770.0,"p27":30656355.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1360827108.0,"p27":1927570188.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":64224225.0,"p27":63590148.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-1-2":{"convenios":{"p26":0,"p27":189193.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Tamaulipas":{"2-5-3":{"convenios":{"p26":2968707508.0,"p27":2732092076.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":30107671.0,"p27":22446274.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":60776292.0,"p27":75452881.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":54284558.0,"p27":40470950.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":53445752.0,"p27":55156016.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":529290789.0,"p27":628621294.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":91622814.0,"p27":91183034.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":38794953.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Tlaxcala":{"2-5-3":{"convenios":{"p26":940147753.0,"p27":847275325.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":8473239.0,"p27":6317082.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":12161204.0,"p27":9066584.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":15547048.0,"p27":16044551.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":587539554.0,"p27":756165617.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":15555561.0,"p27":16546599.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":69786422.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":19146.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":1859318.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Veracruz":{"2-5-3":{"convenios":{"p26":4111940831.0,"p27":3484667949.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":50718535.0,"p27":37812361.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":118914668.0,"p27":2875072.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":88585940.0,"p27":66043777.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":61520225.0,"p27":63488872.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1037212316.0,"p27":1366033407.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":117743639.0,"p27":115194344.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":24848540.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Yucatán":{"2-5-3":{"convenios":{"p26":2405073505.0,"p27":2211230308.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":19680081.0,"p27":23166359.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-5":{"convenios":{"p26":54099102.0,"p27":44691664.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":40558732.0,"p27":21743688.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":47291454.0,"p27":48804781.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":944097513.0,"p27":1028557600.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":58752451.0,"p27":59849546.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":25050842.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"Zacatecas":{"2-5-3":{"convenios":{"p26":1943281666.0,"p27":1709533137.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":20212794.0,"p27":15069313.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":33607254.0,"p27":25055330.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-4":{"convenios":{"p26":36561688.0,"p27":37731662.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":853610191.0,"p27":989620371.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-9":{"convenios":{"p26":13541329.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"3-2-1":{"convenios":{"p26":50854431.0,"p27":51620210.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-4-2":{"convenios":{"p26":1588137.0,"p27":0},"ramo23":{"p26":0.0,"p27":0},"saludPublica":{"p26":0.0,"p27":0}},"2-6-8":{"convenios":{"p26":0,"p27":11335248.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"3-2-5":{"convenios":{"p26":0,"p27":52985.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"2-1-2":{"convenios":{"p26":0,"p27":404873.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}},"No distribuible geográficamente":{"1-7-4":{"convenios":{"p26":1166106569.0,"p27":1201089767.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-3":{"convenios":{"p26":898748703.0,"p27":8329842246.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-2-4":{"convenios":{"p26":276899416.0,"p27":266765373.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-1-2":{"convenios":{"p26":318032653.0,"p27":232721306.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-7-3":{"convenios":{"p26":699512980.0,"p27":699512980.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-2-3":{"convenios":{"p26":2698280.0,"p27":2587049.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-1":{"convenios":{"p26":2879662394.0,"p27":2578033901.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-1":{"convenios":{"p26":1412994553.0,"p27":1395064026.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-5":{"convenios":{"p26":4387081859.0,"p27":2100600152.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-1-3":{"convenios":{"p26":2698281.0,"p27":1648021.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-3-2":{"convenios":{"p26":0.0,"p27":0.0},"ramo23":{"p26":7070400000.0,"p27":7501000000.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-6-8":{"convenios":{"p26":1138043901.0,"p27":602993345.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-5-2":{"convenios":{"p26":0.0,"p27":0.0},"ramo23":{"p26":62038054.0,"p27":90040015.0},"saludPublica":{"p26":0.0,"p27":0.0}},"1-3-7":{"convenios":{"p26":46880585.0,"p27":46880585.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-5-2":{"convenios":{"p26":1037980575.0,"p27":115647547.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-4":{"convenios":{"p26":114869921.0,"p27":128729550.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"2-3-2":{"convenios":{"p26":287694876.0,"p27":327844876.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":88850402777.0,"p27":91717594762.0}},"2-4-2":{"convenios":{"p26":54612453.0,"p27":147663515.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-2-2":{"convenios":{"p26":42310204.0,"p27":59000000.0},"ramo23":{"p26":0.0,"p27":0.0},"saludPublica":{"p26":0.0,"p27":0.0}},"3-3-5":{"convenios":{"p26":0,"p27":0.0},"ramo23":{"p26":0,"p27":5047253768.0},"saludPublica":{"p26":0,"p27":0.0}},"2-5-6":{"convenios":{"p26":0,"p27":17000000000.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}},"1-3-9":{"convenios":{"p26":0,"p27":839671859.0},"ramo23":{"p26":0,"p27":0.0},"saludPublica":{"p26":0,"p27":0.0}}}};
 
 function activeData(){
   return classificationMode==='ramo' ? DB.data : DB.dataFuncional;
@@ -756,6 +1032,7 @@ function init(){
   $('barSlider').oninput=drawBarPage;
   $('stateInfoBtn').onclick=(e)=>{ e.stopPropagation(); toggleStateInfoBubble(); };
   initInfoButtons();
+  initCollapsibleSections();
 
   $('helpBtn').onclick=()=>startTour();
   try{ if(!localStorage.getItem(TOUR_KEY)){ setTimeout(startTour,700); } }catch(e){}
@@ -794,7 +1071,10 @@ function syncMaster(){
   $('master').checked=eligible.length>0 && eligible.every(r=>selected.has(r.id));
 }
 
-const FEDZ_RAMOS=new Set(['28','33']); // Ramo 28 (Participaciones) + Ramo 33 (Aportaciones): únicos ramos identificables sin ambigüedad como "gasto federalizado" en esta base.
+const FEDZ_RAMOS=new Set(['28','33']);
+const FEDZ_CONVENIOS_RAMOS=new Set(['04','08','09','11','12','14','16','27','36','48','54','56']);
+const FEDZ_R23_PPS=new Set(['28','31','93','116']);
+const FEDZ_HEALTH_RAMOS=new Set(['56']);
 
 function componentOf(ramoId,type=gastoType){
   if(type==='noProgramable'){
@@ -825,29 +1105,182 @@ function varClass(v){
 // Partición exhaustiva y mutuamente excluyente del universo seleccionado.
 function territorialSplitFromRows(rows){
   let f26=0,f27=0,t26=0,t27=0;
-  rows.forEach(r=>{
-    if(r.isAdjustment) return;
-    t26+=r.p26||0; t27+=r.p27||0;
-    if(classificationMode==='ramo'){
-      if(gastoType==='noProgramable'){
-        if(String(r.id)==='28'){ f26+=r.p26||0; f27+=r.p27||0; }
-      }else if(gastoType==='programable'){
-        if(String(r.id)==='33'){ f26+=r.p26||0; f27+=r.p27||0; }
-      }else{
-        if(FEDZ_RAMOS.has(String(r.id))){ f26+=r.p26||0; f27+=r.p27||0; }
+  rows.forEach(r=>{ if(!r.isAdjustment){ t26+=r.p26||0; t27+=r.p27||0; } });
+
+  // Ramo 28 + Ramo 33 conservan la lógica original. Los demás componentes
+  // se agregan desde FEDERAL_COMPONENTS/FEDERAL_FUNCTIONAL sin volver a contar
+  // recursos ya incluidos en otra categoría.
+  if(classificationMode==='ramo'){
+    rows.forEach(r=>{
+      if(r.isAdjustment) return;
+      // Normaliza los identificadores de ramo a dos dígitos para que
+      // Ramo 8 y la clave de datos '08' se reconozcan como el mismo ramo.
+      const id=String(r.id).padStart(2,'0');
+      if(id==='28' || id==='33'){
+        f26+=r.p26||0; f27+=r.p27||0;
       }
-    }else{
-      if(gastoType==='noProgramable'){
-        if(Number(r.grupoId)===4 && Number(r.funcionId)===2 && Number(r.subfuncionId)===2){ f26+=r.p26||0; f27+=r.p27||0; }
-      }else if(gastoType==='programable'){
-        const part=((Number(r.grupoId)===4 && Number(r.funcionId)===2 && Number(r.subfuncionId)===2)?(r.p26||0):0);
-        f26+=Math.max(0,(r.fedz26||0)-part); f27+=Math.max(0,(r.fedz27||0)-((Number(r.grupoId)===4 && Number(r.funcionId)===2 && Number(r.subfuncionId)===2)?(r.p27||0):0));
-      }else{
-        f26+=(r.fedz26||0); f27+=(r.fedz27||0);
+    });
+
+    if(gastoType!=='noProgramable'){
+      const st=$('state').value;
+      const comp=FEDERAL_COMPONENTS[st]||FEDERAL_COMPONENTS['Nacional'];
+      const selectedRamos=new Set(rows.filter(r=>!r.isAdjustment).map(r=>String(r.id).padStart(2,'0')));
+      if(comp){
+        const by26=comp.conveniosByRamo?.p26||{}, by27=comp.conveniosByRamo?.p27||{};
+        for(const id of selectedRamos){
+          if(FEDZ_CONVENIOS_RAMOS.has(id)){ f26+=by26[id]||0; f27+=by27[id]||0; }
+        }
+        if(selectedRamos.has('23')){ f26+=comp.ramo23?.p26||0; f27+=comp.ramo23?.p27||0; }
+        if(selectedRamos.has('56') && comp.saludPublica?.p26!=null){
+          f26+=comp.saludPublica.p26||0; f27+=comp.saludPublica.p27||0;
+        }
       }
     }
-  });
+  }else{
+    // En clasificación funcional, fedz26/fedz27 ya representan Ramo 28 + 33.
+    rows.forEach(r=>{
+      if(r.isAdjustment) return;
+      f26+=r.fedz26||0; f27+=r.fedz27||0;
+      if(gastoType==='programable'){
+        const part=(Number(r.grupoId)===4 && Number(r.funcionId)===2 && Number(r.subfuncionId)===2)?(r.p26||0):0;
+        f26-=Math.min(f26,part); // conserva la conciliación histórica de la vista funcional
+        const part27=(Number(r.grupoId)===4 && Number(r.funcionId)===2 && Number(r.subfuncionId)===2)?(r.p27||0):0;
+        f27-=Math.min(f27,part27);
+      }
+    });
+    if(gastoType!=='noProgramable'){
+      const st=$('state').value, fmap=FEDERAL_FUNCTIONAL[st]||{};
+      rows.filter(r=>!r.isAdjustment).forEach(r=>{
+        const c=fmap[String(r.id)];
+        if(c){
+          f26+=(c.convenios?.p26||0)+(c.ramo23?.p26||0)+(c.saludPublica?.p26||0);
+          f27+=(c.convenios?.p27||0)+(c.ramo23?.p27||0)+(c.saludPublica?.p27||0);
+        }
+      });
+    }
+  }
   return {fedz:{p26:f26,p27:f27},fedt:{p26:t26-f26,p27:t27-f27},total:{p26:t26,p27:t27}};
+}
+
+function federalizedComponentMetrics(){
+  const state=$('state').value;
+  const out={convenios:{p26:0,p27:0},saludPublica:{p26:null,p27:null},ramo23:{p26:0,p27:0},total:{p26:0,p27:0}};
+  if(gastoType==='noProgramable') return out;
+
+  /*
+    La tarjeta "Convenios de Descentralización" representa el UNIVERSO COMPLETO
+    de CAPÍTULO 4000 + PARTIDA GENÉRICA 438, excluyendo Ramo 23.
+    Por tanto, NO debe depender de los Ramos seleccionados en el panel lateral.
+    La selección de Ramos sí puede afectar las tarjetas/series del análisis,
+    pero no debe recortar este indicador institucional.
+  */
+  const comp=FEDERAL_COMPONENTS[state]||FEDERAL_COMPONENTS['Nacional'];
+  if(comp){
+    out.convenios.p26=comp.convenios?.p26||0;
+    out.convenios.p27=comp.convenios?.p27||0;
+    out.ramo23.p26=comp.ramo23?.p26||0;
+    out.ramo23.p27=comp.ramo23?.p27||0;
+    if(comp.saludPublica?.p26!=null){
+      out.saludPublica.p26=comp.saludPublica.p26;
+      out.saludPublica.p27=comp.saludPublica.p27;
+    }
+  }
+
+  /* En las entidades federativas Salud Pública no se territorializa. */
+  if(state!=='Nacional' && state!=='No distribuible geográficamente'){
+    out.saludPublica={p26:null,p27:null};
+  }
+  out.total.p26=out.convenios.p26+out.ramo23.p26+(out.saludPublica.p26||0);
+  out.total.p27=out.convenios.p27+out.ramo23.p27+(out.saludPublica.p27||0);
+  return out;
+}
+
+function federalizedBreakdownMetrics(){
+  const state=$('state').value;
+  const activeRows=getRows().filter(r=>!r.isAdjustment);
+  const comp=FEDERAL_COMPONENTS[state]||FEDERAL_COMPONENTS['Nacional']||{};
+  const getRamo=id=>{
+    const r=activeRows.find(x=>String(x.id)===String(id));
+    return {p26:r?.p26||0,p27:r?.p27||0};
+  };
+
+  // El desglose debe utilizar exactamente el mismo universo activo que la tarjeta
+  // de Gasto federalizado. Así, la suma de las tarjetas desplegadas siempre reconcilia
+  // con el total, incluso cuando el usuario deselecciona uno o varios ramos.
+  const r28=getRamo('28');
+  const r33=getRamo('33');
+  let r23={p26:0,p27:0};
+  let conv={p26:0,p27:0};
+
+  if(gastoType!=='noProgramable' && classificationMode==='ramo'){
+    const selectedRamos=new Set(activeRows.map(r=>String(r.id).padStart(2,'0')));
+    if(selectedRamos.has('23')){
+      r23={p26:comp.ramo23?.p26||0,p27:comp.ramo23?.p27||0};
+    }
+    const by26=comp.conveniosByRamo?.p26||{}, by27=comp.conveniosByRamo?.p27||{};
+    for(const id of selectedRamos){
+      if(FEDZ_CONVENIOS_RAMOS.has(id)){
+        conv.p26+=by26[id]||0;
+        conv.p27+=by27[id]||0;
+      }
+    }
+  }
+
+  const health=(state==='Nacional'||state==='No distribuible geográficamente')
+    ? {p26:comp.saludPublica?.p26??null,p27:comp.saludPublica?.p27??null}
+    : {p26:null,p27:null};
+
+  // Salud Pública permanece como n.d. en la vista estatal y no se agrega al total
+  // territorial porque no existe una asignación geográfica por entidad.
+  const total={
+    p26:r28.p26+r33.p26+r23.p26+conv.p26,
+    p27:r28.p27+r33.p27+r23.p27+conv.p27
+  };
+  return {total,r28,r33,r23,convenios:conv,saludPublica:health};
+}
+function formatBreakdownMetric(prefix,m){
+  const e26=$(prefix+'_26'),e27=$(prefix+'_27'),eabs=$(prefix+'_abs'),ereal=$(prefix+'_real');
+  if(e26)e26.textContent=money(m.p26);
+  if(e27)e27.textContent=money(m.p27);
+  if(eabs)eabs.textContent=signedMoney(m.p27-m.p26);
+  if(ereal)ereal.textContent=signedPct(real(m.p26,m.p27));
+}
+function federalizedBreakdownComponentAllowed(component){
+  if(gastoType==='total') return true;
+  // Ramo 28: componente no programable (Participaciones).
+  if(gastoType==='noProgramable') return component==='ramo28';
+  // Ramo 33, Convenios, Ramo 23 federalizado y Salud Pública: programables
+  // en el desglose utilizado por este simulador.
+  return component!=='ramo28';
+}
+
+function updateFederalizedBreakdownVisibility(){
+  document.querySelectorAll('#fedzBreakdownPanel [data-fed-component]').forEach(card=>{
+    const component=card.getAttribute('data-fed-component');
+    card.style.display=federalizedBreakdownComponentAllowed(component)?'':'none';
+  });
+}
+
+function updateFederalizedBreakdown(){
+  updateFederalizedBreakdownVisibility();
+  const m=federalizedBreakdownMetrics();
+  formatBreakdownMetric('fb28',m.r28);formatBreakdownMetric('fb33',m.r33);formatBreakdownMetric('fb23',m.r23);formatBreakdownMetric('fbConv',m.convenios);
+  const hp26=$('fbHealth_26'),hp27=$('fbHealth_27'),ha=$('fbHealth_abs'),hr=$('fbHealth_real');
+  if(hp26&&hp27&&ha&&hr){if(m.saludPublica.p26==null||m.saludPublica.p27==null){hp26.textContent='n.d.';hp27.textContent='n.d.';ha.textContent='n.a.';hr.textContent='n.a.';}else{hp26.textContent=money(m.saludPublica.p26);hp27.textContent=money(m.saludPublica.p27);ha.textContent=signedMoney(m.saludPublica.p27-m.saludPublica.p26);hr.textContent=signedPct(real(m.saludPublica.p26,m.saludPublica.p27));}}
+  const note=$('fedzBreakdownNote');
+  if(note){note.innerHTML=$('state').value==='Nacional'?'<b>Lectura:</b> las tarjetas muestran el Gasto Federalizado y sus principales componentes. Salud Pública se mantiene como componente separado.':'<b>Lectura:</b> el desglose respeta los ramos seleccionados en el panel. Por ello, la suma de las tarjetas desplegadas reconcilia con el total de Gasto federalizado. Salud Pública aparece como n.d. en la vista estatal porque estos recursos no se distribuyen territorialmente a una entidad específica y no se suman al total estatal.';}
+}
+function toggleFederalizedBreakdown(force){
+  const btn=$('fedzBreakdownToggle'),panel=$('fedzBreakdownPanel');
+  if(!btn||!panel)return;
+  const open=typeof force==='boolean' ? force : btn.getAttribute('aria-expanded')!=='true';
+  btn.setAttribute('aria-expanded',open?'true':'false');
+  panel.setAttribute('aria-hidden',open?'false':'true');
+  panel.classList.toggle('open',open);
+  const chev=btn.querySelector('.chev');
+  if(chev) chev.textContent=open?'⌃':'⌄';
+  btn.firstChild && (btn.firstChild.nodeValue=open?'Ocultar ':'Desagregar ');
+  if(open) updateFederalizedBreakdown();
 }
 
 function fillIndicatorBlock(prefix,p26,p27){
@@ -888,11 +1321,41 @@ const TERR_INFO={
       <div class="tmodal-formula">Gasto Neto Total = Gasto Programable + Gasto No programable</div>
       <p>El Gasto Programable se presenta neto de aportaciones al ISSSTE y de subsidios, transferencias y apoyos fiscales a entidades de control directo y Empresas Públicas del Estado.</p>`
   },
+  ramo28:{tooltip:'Ramo 28: Participaciones Federales a Entidades Federativas y Municipios.',title:'¿Qué es el Ramo 28?',body:`<p>El <b>Ramo 28, Participaciones a Entidades Federativas y Municipios</b>, corresponde a recursos que la Federación distribuye a los gobiernos locales conforme al sistema de coordinación fiscal.</p><p>En el simulador se presenta como uno de los componentes del <b>Gasto Federalizado</b>.</p>`},
+  ramo33:{tooltip:'Ramo 33: Aportaciones Federales para Entidades Federativas y Municipios.',title:'¿Qué es el Ramo 33?',body:`<p>El <b>Ramo 33, Aportaciones Federales para Entidades Federativas y Municipios</b>, reúne recursos federales destinados al financiamiento de funciones y servicios públicos específicos en los gobiernos locales.</p><p>En el simulador se presenta como otro componente del <b>Gasto Federalizado</b>.</p>`},
+  ramo23:{tooltip:'Componente de Gasto Federalizado identificado dentro del Ramo 23.',title:'¿Qué es el Gasto Federalizado identificado en el Ramo 23?',body:`<p>El <b>Ramo 23, Provisiones Salariales y Económicas</b>, contiene recursos con distintos propósitos. En esta herramienta se identifica por separado el componente considerado <b>Gasto Federalizado</b>.</p><p>La identificación utilizada corresponde a los programas presupuestarios <b>28, 31, 93 y 116</b>.</p><p class="tmodal-note">Se presenta por separado para evitar doble conteo con otros componentes del Gasto Federalizado.</p>`},
+  saludPublica:{tooltip:'Componente de Salud Pública considerado dentro del Gasto Federalizado.',title:'¿Qué es Salud Pública?',body:`<p>En la integración del Gasto Federalizado, <b>Salud Pública</b> identifica recursos asociados a la atención de la población sin seguridad social mediante el Ramo 56.</p><p>En la vista estatal puede mostrarse como <b>n.d.</b> porque no se distribuye territorialmente a una entidad específica.</p><p class="tmodal-note">La ausencia de un dato estatal no significa que el componente no exista a nivel nacional; significa que no se asigna territorialmente a una entidad.</p>`},
   fedz:{
-    tooltip:'Recursos federales transferidos a las entidades federativas y municipios mediante los conceptos que integran el gasto federalizado.',
-    title:'Gasto federalizado',
-    body:`<p>Son los recursos federales que se transfieren a las entidades federativas y municipios conforme a los conceptos que integran el gasto federalizado.</p>
-      <p>En este simulador, <b>Ramo 28</b> se clasifica como no programable y <b>Ramo 33</b> como programable; por ello no aparecen simultáneamente en un mismo universo cuando se selecciona el tipo de gasto.</p>`
+    tooltip:'El Gasto Federalizado se presenta como un agregado y puede desagregarse en sus principales componentes.',
+    title:'¿Qué integra el Gasto Federalizado?',
+    body:`<p>El <b>Gasto Federalizado</b> reúne recursos federales que se canalizan a las entidades federativas y municipios o que se identifican específicamente como recursos con destino federalizado.</p><p>En esta herramienta se desagrega en <b>Ramo 28</b>, <b>Ramo 33</b>, <b>Convenios de Descentralización</b>, <b>Gasto Federalizado identificado en el Ramo 23</b> y <b>Salud Pública</b>.</p><p>La opción <b>Desagregar</b> permite consultar cada componente, sus montos para 2026 y 2027 y sus variaciones.</p><p>Los componentes se presentan por separado para facilitar la lectura y evitar <b>doble conteo</b> cuando un mismo recurso aparece con características de más de una clasificación.</p><p>En Salud Pública, para las entidades federativas el dato puede mostrarse como <b>n.d.</b> porque no se distribuye territorialmente. Los registros con <b>EF = 34</b> tampoco se asignan a una entidad específica.</p>`
+  },
+  convenios:{
+    tooltip:'Los Convenios de Descentralización son recursos federales transferidos mediante acuerdos o convenios con las entidades federativas para financiar programas, acciones o servicios específicos. En la base se identifican en el CAPÍTULO 4000, PARTIDA GENÉRICA 438.',
+    title:'¿Qué son los Convenios de Descentralización y cómo se identifican?',
+    body:`<p><b>¿Qué son los Convenios de Descentralización?</b><br>
+      Son recursos federales que se transfieren a las entidades federativas mediante acuerdos o convenios de coordinación y colaboración con dependencias del Gobierno Federal, para apoyar la ejecución de programas, acciones o servicios específicos.</p>
+
+      <p><b>¿Cómo los identifica este simulador?</b><br>
+      En la base presupuestaria se identifican mediante registros del <b>Capítulo 4000 “Transferencias de recursos”</b>, específicamente en la <b>Partida Genérica 438: “Subsidios a Entidades Federativas y Municipios”</b>.</p>
+
+      <div class="tmodal-formula" style="text-align:left;line-height:1.55">
+        <b>¿Dónde encontrarlos en la base?</b><br>
+        Capítulo = <b>4000</b><br>
+        Partida genérica = <b>438</b><br>
+        Descripción = <b>Subsidios a Entidades Federativas y Municipios</b>
+      </div>
+
+      <p><b>¿Cómo se calcula el monto mostrado?</b><br>
+      El simulador suma los registros que cumplen con esos criterios para la entidad seleccionada y para cada ejercicio presupuestario.</p>
+
+      <p><b>¿Qué ocurre cuando se selecciona una entidad?</b><br>
+      El simulador toma los registros que tienen asignada esa entidad federativa en la base. Los recursos identificados como <b>EF = 34, “No distribuible geográficamente”</b>, no se distribuyen entre los estados.</p>
+
+      <p><b>¿Qué muestran las cifras?</b><br>
+      La tarjeta compara el monto identificado para <b>PEF 2026</b> y <b>PPEF 2027</b> y muestra su <b>variación nominal</b> y <b>variación real</b>.</p>
+
+      <p class="tmodal-note"><b>Importante:</b> No todo el gasto del <b>Capítulo 4000</b> corresponde a Convenios de Descentralización. Para esta tarjeta, el criterio de identificación es específicamente la <b>Partida Genérica 438</b>. En la integración del Gasto Federalizado, los recursos que se clasifican por separado como componente federalizado del <b>Ramo 23</b> no se vuelven a sumar como Convenios, para evitar doble conteo.</p>`
   },
   fedt:{
     tooltip:'Gasto del Gobierno Federal y sus entidades que puede identificarse territorialmente en la entidad federativa, excluyendo el gasto federalizado.',
@@ -990,6 +1453,44 @@ function initInfoButtons(){
   if(typeInfo){
     typeInfo.addEventListener('click',e=>{e.stopPropagation();openCurrentTypeInfo();});
   }
+  const fedzToggle=$('fedzBreakdownToggle');
+  if(fedzToggle){
+    // Usamos onclick en lugar de addEventListener para que el botón conserve
+    // un solo manejador aunque initInfoButtons() se ejecute varias veces
+    // (por ejemplo, al actualizar la tabla de detalle).
+    fedzToggle.onclick=(e)=>{ e.stopPropagation(); toggleFederalizedBreakdown(); };
+  }
+}
+
+
+function setCollapsibleSection(toggleId,panelId,open){
+  const btn=$(toggleId),panel=$(panelId);
+  if(!btn||!panel) return;
+  const next=!!open;
+  btn.setAttribute('aria-expanded',next?'true':'false');
+  panel.hidden=!next;
+}
+
+function toggleCollapsibleSection(toggleId,panelId,force){
+  const btn=$(toggleId),panel=$(panelId);
+  if(!btn||!panel) return false;
+  const current=btn.getAttribute('aria-expanded')==='true';
+  const next=typeof force==='boolean'?force:!current;
+  setCollapsibleSection(toggleId,panelId,next);
+  return next;
+}
+
+function initCollapsibleSections(){
+  const compBtn=$('comparativoRamoToggle');
+  if(compBtn) compBtn.onclick=(e)=>{
+    e.stopPropagation();
+    toggleCollapsibleSection('comparativoRamoToggle','comparativoRamoPanel');
+  };
+  const fedBtn=$('detalleFedToggle');
+  if(fedBtn) fedBtn.onclick=(e)=>{
+    e.stopPropagation();
+    toggleCollapsibleSection('detalleFedToggle','federalizedDetailPanel');
+  };
 }
 
 let currentMetrics={p26:0,p27:0,rows:[]};
@@ -998,7 +1499,12 @@ let lastDonutTotal=0;
 function applyTypeLabels(){
   const label=GASTO_TYPE_LABEL[gastoType];
   const state=$('state').value;
-  $('territorialTypeTitle').textContent = state==='Nacional' ? `Gasto ${label}` : `Gasto ${label} territorial`;
+  const geographicTitle = gastoType==='programable'
+    ? 'Gasto programable clasificación geográfica'
+    : gastoType==='noProgramable'
+      ? 'Gasto no programable clasificación geográfica'
+      : 'Gasto total clasificación geográfica';
+  $('territorialTypeTitle').textContent = state==='Nacional' ? `Gasto ${label}` : geographicTitle;
   $('nkCard26').querySelector('.label').textContent = `${gastoType==='total'?'Gasto Neto Total ':label+' '}PEF 2026 (mdp)`;
   $('nkCard27').querySelector('.label').textContent = `${gastoType==='total'?'Gasto Neto Total ':label+' '}PPEF 2027 (mdp)`;
 }
@@ -1017,6 +1523,192 @@ function updateNationalNote(){
     note.querySelector('span').textContent='El Gasto Neto Total se obtiene como Gasto Programable + Gasto No programable. El Gasto Programable se presenta neto de aportaciones al ISSSTE y de subsidios, transferencias y apoyos fiscales a entidades de control directo y Empresas Públicas del Estado.';
   }
   if(b) b.title='Más información';
+}
+
+function federalizedDetailSelectedRamos(){
+  return new Set((getRows()||[]).filter(r=>!r.isAdjustment).map(r=>String(r.id).padStart(2,'0')));
+}
+
+function ramoNameById(id){
+  const key=String(id).padStart(2,'0');
+  const rows=(DB.data&&DB.data.Nacional)||[];
+  const found=rows.find(r=>String(r.id).padStart(2,'0')===key);
+  return found?.name || `Ramo ${key}`;
+}
+
+function federalizedDetailComponentAllowed(component){
+  // La clasificación de gasto del menú debe gobernar también esta tabla:
+  // Ramo 28 corresponde a No programable; Ramo 33, Convenios, Ramo 23 federalizado
+  // y Salud Pública corresponden al universo Programable en este desglose.
+  if(gastoType==='total') return true;
+  if(gastoType==='noProgramable') return component==='ramo28';
+  return component!=='ramo28';
+}
+
+function federalizedDetailData(){
+  const rows=(getRows()||[]).filter(r=>!r.isAdjustment);
+  const comp=FEDERAL_COMPONENTS[$('state').value]||FEDERAL_COMPONENTS['Nacional']||{};
+  const selectedRamos=federalizedDetailSelectedRamos();
+  const getRamo=id=>{
+    const key=String(id).padStart(2,'0');
+    const r=rows.find(x=>String(x.id).padStart(2,'0')===key);
+    return {p26:r?.p26||0,p27:r?.p27||0};
+  };
+
+  const r28=federalizedDetailComponentAllowed('ramo28') ? getRamo('28') : {p26:0,p27:0};
+  const r33=federalizedDetailComponentAllowed('ramo33') ? getRamo('33') : {p26:0,p27:0};
+
+  let convenios={p26:0,p27:0};
+  const convBy26=comp.conveniosByRamo?.p26||{};
+  const convBy27=comp.conveniosByRamo?.p27||{};
+  const convenioRamos=[];
+  if(federalizedDetailComponentAllowed('convenios')){
+    for(const id of selectedRamos){
+      if(FEDZ_CONVENIOS_RAMOS.has(id)){
+        const p26=convBy26[id]||0, p27=convBy27[id]||0;
+        if(p26!==0 || p27!==0){
+          convenioRamos.push({id,p26,p27});
+          convenios.p26+=p26; convenios.p27+=p27;
+        }
+      }
+    }
+  }
+  convenioRamos.sort((a,b)=>Number(a.id)-Number(b.id));
+
+  const ramo23=federalizedDetailComponentAllowed('ramo23') && selectedRamos.has('23')
+    ? {p26:comp.ramo23?.p26||0,p27:comp.ramo23?.p27||0}
+    : {p26:0,p27:0};
+
+  let saludPublica={p26:null,p27:null};
+  if(federalizedDetailComponentAllowed('saludPublica')){
+    if($('state').value==='Nacional' || $('state').value==='No distribuible geográficamente'){
+      saludPublica=selectedRamos.has('56')
+        ? {p26:comp.saludPublica?.p26??null,p27:comp.saludPublica?.p27??null}
+        : {p26:0,p27:0};
+    }
+  }else{
+    saludPublica={p26:0,p27:0};
+  }
+
+  // El total debe ser exactamente el mismo que la tarjeta de Gasto federalizado.
+  const split=territorialSplitFromRows(rows);
+  return {r28,r33,convenios,ramo23,saludPublica,total:split.fedz,convenioRamos};
+}
+
+function federalizedDetailMetricCells(m){
+  const p26=m.p26||0,p27=m.p27||0;
+  const realv=(p26===0&&p27===0)?NaN:real(p26,p27);
+  return `<td>${money(p26)}</td><td>${money(p27)}</td><td class="var">${signedMoney(p27-p26)}</td><td class="${realv<0?'fed-real-neg':'fed-real-pos'}">${signedPct(realv)}</td>`;
+}
+
+function federalizedDetailVisibilityClass(component){
+  return federalizedDetailComponentAllowed(component) ? '' : ' style="display:none"';
+}
+
+function federalizedChartComponents(){
+  const d=federalizedDetailData();
+  const comps=[
+    {key:'ramo28',label:'Ramo 28',name:'Participaciones Federales',m:d.r28},
+    {key:'ramo33',label:'Ramo 33',name:'Aportaciones Federales',m:d.r33},
+    {key:'convenios',label:'Convenios',name:'Convenios de Descentralización',m:d.convenios},
+    {key:'ramo23',label:'Ramo 23',name:'Ramo 23 federalizado',m:d.ramo23},
+    {key:'saludPublica',label:'Salud Pública',name:'Salud Pública',m:d.saludPublica}
+  ];
+  return comps.filter(c=>federalizedDetailComponentAllowed(c.key) && c.m && c.m.p26!=null && c.m.p27!=null && (c.m.p26!==0 || c.m.p27!==0));
+}
+
+function renderFederalizedCharts(){
+  const state=$('state').value;
+  const comps=federalizedChartComponents();
+  const classification=GASTO_TYPE_LABEL[gastoType]||'Total';
+  const title=$('fedChartTitle'), dtitle=$('fedDonutTitle'), sub=$('fedDonutSubcaption');
+  if(title) title.textContent=`Comparativo del Gasto Federalizado — ${state}`;
+  if(dtitle) dtitle.textContent=`Distribución PPEF 2027 del Gasto Federalizado (${classification})`;
+  if(sub) sub.textContent=`Componentes incluidos: ${classification}.`;
+
+  const bar=$('fedBarChart');
+  if(bar){
+    if(!comps.length){
+      bar.innerHTML='<div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;color:#7a8782;font-size:12px">No hay componentes de Gasto Federalizado en la selección actual.</div>';
+    }else{
+      const max=Math.max(1,...comps.flatMap(c=>[c.m.p26||0,c.m.p27||0]));
+      bar.innerHTML=comps.map(c=>{
+        const h26=Math.max(2,((c.m.p26||0)/max)*220);
+        const h27=Math.max(2,((c.m.p27||0)/max)*220);
+        // Ramo 28 y 33 llevan la cifra al interior cuando la barra tiene suficiente altura.
+        // Si la barra es pequeña, la cifra sale arriba para evitar solapamientos.
+        const isMainFederalized=(c.key==='ramo28' || c.key==='ramo33');
+        const class26=(isMainFederalized && h26>=75) ? 'middle' : 'top';
+        const class27=(isMainFederalized && h27>=75) ? 'middle' : 'top';
+        return `<div class="fed-bar-group">
+          <div class="fed-bar a" style="height:${h26}px"><span class="fed-bar-value ${class26}">${money(c.m.p26)}</span></div>
+          <div class="fed-bar b" style="height:${h27}px"><span class="fed-bar-value ${class27}">${money(c.m.p27)}</span></div>
+          <span class="fed-bar-label" title="${esc(c.name)}">${esc(c.label)}</span>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  const total27=comps.reduce((sum,c)=>sum+(c.m.p27||0),0);
+  const donut=$('fedDonut'), legend=$('fedDonutLegend'), total=$('fedDonutTotal'), center=$('fedDonutCenter');
+  if(total) total.textContent=`${money(total27)} mdp`;
+  if(center) center.innerHTML='';
+
+  if(!donut||!legend) return;
+  if(!total27){
+    donut.style.background='conic-gradient(#dfe5e2 0 100%)';
+    legend.innerHTML='<span style="color:#7a8782">Sin datos disponibles</span>';
+    return;
+  }
+  let acc=0;
+  const palette=['#1b6148','#57a47e','#c8b58b','#9d7a3e','#bd425e','#d77f86','#a8c7b7'];
+  const stops=[];
+  comps.forEach((c,i)=>{
+    const pct=(c.m.p27||0)/total27*100;
+    const start=acc, end=acc+pct; acc=end;
+    stops.push(`${palette[i%palette.length]} ${start}% ${end}%`);
+  });
+  if(acc<100) stops.push(`#dfe5e2 ${acc}% 100%`);
+  donut.style.background=`conic-gradient(${stops.join(',')})`;
+  legend.innerHTML=comps.map((c,i)=>{
+    const pct=(c.m.p27||0)/total27*100;
+    return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="display:flex;align-items:center;gap:6px"><i style="width:10px;height:10px;border-radius:50%;background:${palette[i%palette.length]};display:inline-block"></i>${esc(c.label)}</span><strong>${pct.toFixed(1)}%</strong></div>`;
+  }).join('');
+}
+
+function renderFederalizedDetailTable(){
+  const body=$('federalizedDetailBody');
+  if(!body) return;
+  const d=federalizedDetailData();
+  const state=$('state').value;
+  const classification=GASTO_TYPE_LABEL[gastoType]||'Total';
+  const title=$('federalizedDetailTitle');
+  const subtitle=document.querySelector('.federalized-detail-subtitle');
+  if(title) title.textContent=`Detalle del Gasto Federalizado — ${state}`;
+  if(subtitle) subtitle.textContent=`Clasificación: Gasto ${classification}. El desglose responde al tipo de gasto seleccionado y respeta los Ramos activos del menú.`;
+
+  const health=d.saludPublica.p26==null || d.saludPublica.p27==null;
+  const saludCells=health ? '<td>n.d.</td><td>n.d.</td><td class="var">n.a.</td><td class="fed-real-pos">n.a.</td>' : federalizedDetailMetricCells(d.saludPublica);
+  const convRows=d.convenioRamos.length?d.convenioRamos.map(r=>`<tr><td>${esc(r.id)} · ${esc(ramoNameById(r.id))}</td>${federalizedDetailMetricCells(r)}</tr>`).join('') : '<tr><td colspan="5" style="text-align:center;color:#7a8782;padding:8px">No hay Ramos con Convenios dentro de la selección actual.</td></tr>';
+  const convTotal=`<tr class="fed-conv-total"><td>Total Convenios</td>${federalizedDetailMetricCells(d.convenios)}</tr>`;
+
+  body.innerHTML=`
+    <tr class="fed-main"${federalizedDetailVisibilityClass('ramo28')}><td><div class="fed-detail-label"><span class="code">28</span><span>Participaciones Federales</span><button class="t-info-btn fed-detail-info" data-comp="ramo28" type="button" aria-label="Explicación de Ramo 28">ⓘ</button></div></td>${federalizedDetailMetricCells(d.r28)}</tr>
+    <tr class="fed-main"${federalizedDetailVisibilityClass('ramo33')}><td><div class="fed-detail-label"><span class="code">33</span><span>Aportaciones Federales</span><button class="t-info-btn fed-detail-info" data-comp="ramo33" type="button" aria-label="Explicación de Ramo 33">ⓘ</button></div></td>${federalizedDetailMetricCells(d.r33)}</tr>
+    <tr class="fed-main fed-convenios"${federalizedDetailVisibilityClass('convenios')}><td><div class="fed-detail-label"><span class="code">—</span><span>Convenios de Descentralización</span><button class="t-info-btn fed-detail-info" data-comp="convenios" type="button" aria-label="Explicación de Convenios">ⓘ</button><button class="fed-detail-toggle" type="button" aria-expanded="false" data-fed-conv-toggle="1">Ver Ramos</button></div></td>${federalizedDetailMetricCells(d.convenios)}</tr>
+    <tr class="fed-convenios-subrow" id="federalizedConveniosSubrow" style="display:none"${federalizedDetailVisibilityClass('convenios')}><td colspan="5"><div class="fed-convenios-subwrap"><table class="fed-convenios-subtable"><thead><tr><th>Ramo contenido en Convenios</th><th>PEF 2026<br>(mdp)</th><th>PPEF 2027<br>(mdp)</th><th>Variación abs.</th><th>Variación real</th></tr></thead><tbody>${convRows}${convTotal}</tbody></table></div></td></tr>
+    <tr class="fed-main"${federalizedDetailVisibilityClass('ramo23')}><td><div class="fed-detail-label"><span class="code">23</span><span>Gasto Federalizado identificado en el Ramo 23</span><button class="t-info-btn fed-detail-info" data-comp="ramo23" type="button" aria-label="Explicación del Ramo 23 federalizado">ⓘ</button></div></td>${federalizedDetailMetricCells(d.ramo23)}</tr>
+    <tr class="fed-main fed-nd"${federalizedDetailVisibilityClass('saludPublica')}><td><div class="fed-detail-label"><span class="code">56</span><span>Salud Pública</span><button class="t-info-btn fed-detail-info" data-comp="saludPublica" type="button" aria-label="Explicación de Salud Pública">ⓘ</button></div></td>${saludCells}</tr>
+    <tr class="fed-total"><td><div class="fed-detail-label"><span>Total Gasto Federalizado</span></div></td>${federalizedDetailMetricCells(d.total)}</tr>`;
+
+  body.querySelector('[data-fed-conv-toggle]')?.addEventListener('click',e=>{
+    const btn=e.currentTarget,row=$('federalizedConveniosSubrow');
+    const open=btn.getAttribute('aria-expanded')!=='true';
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.textContent=open?'Ocultar Ramos':'Ver Ramos';
+    row.style.display=open?'table-row':'none';
+  });
+  initInfoButtons();
 }
 
 function update(){
@@ -1050,15 +1742,31 @@ function update(){
     $('rowFedZ').style.display=showFedZ?'':'none'; $('rowFedT').style.display=showFedT?'':'none';
     if(showFedZ) fillIndicatorBlock('fz',split.fedz.p26,split.fedz.p27);
     if(showFedT) fillIndicatorBlock('ft',split.fedt.p26,split.fedt.p27);
+    updateFederalizedBreakdown();
+
+    const cm=federalizedComponentMetrics();
+    fillIndicatorBlock('cv',cm.convenios.p26,cm.convenios.p27);
+    const note=$('conveniosNote');
+    if(note){
+      const hp=(cm.saludPublica.p26==null || cm.saludPublica.p27==null)
+        ? 'Salud Pública: n.d. para la entidad (no se distribuye territorialmente).'
+        : `Salud Pública: ${money(cm.saludPublica.p27)} mdp en PPEF 2027.`;
+      const r23=`Ramo 23 federalizado identificado: ${money(cm.ramo23.p27)} mdp en PPEF 2027.`;
+      note.innerHTML=`<b>Componente del Gasto federalizado.</b> Se identifica con CAPÍTULO 4000 + PARTIDA GENÉRICA 438. ${hp} ${r23}`;
+    }
   }
+
+  const fedDetailSection=$('detalleFedSection'); if(fedDetailSection) fedDetailSection.style.display=classificationMode==='ramo'?'':'none';
 
   const dim=classificationMode==='ramo'?'Ramo':'Función';
   $('chartTitle').textContent=`Comparativo por ${dim} (${GASTO_TYPE_LABEL[gastoType]}, mdp) - ${state}`;
+  const compToggleLabel=$('comparativoRamoToggleLabel');
+  if(compToggleLabel) compToggleLabel.textContent=classificationMode==='ramo'?'Comparativo por Ramo':'Comparativo por Función';
   $('donutTitle').textContent=`Distribución PPEF 2027 por ${dim} (${GASTO_TYPE_LABEL[gastoType]})`;
   $('donutSubcaption').textContent=isNacional?'':(gastoType==='programable'?'El Programable se concilia con la clasificación geográfica de SHCP sin distribuir el ajuste entre ramos.':gastoType==='noProgramable'?'Incluye únicamente conceptos no programables identificados en la base primaria.':'Resultado de la suma de Programable y No programable.');
   $('tableTitle').textContent=`Detalle por ${dim} - ${state} - ${GASTO_TYPE_LABEL[gastoType]}`;
 
-  renderBars(rows); renderDonut(rows,b); renderTable(rows,a,b,vn,vr);
+  renderBars(rows); renderDonut(rows,b); renderTable(rows,a,b,vn,vr); renderFederalizedCharts(); renderFederalizedDetailTable();
   validateTotals();
 }
 
@@ -1424,18 +2132,21 @@ function toggleStateInfoBubble(){
 
 
 /* ---- Tour guiado (burbujas de bienvenida) ---- */
-const TOUR_KEY='simuladorPPEF2027_tourSeen_v2';
+const TOUR_KEY='simuladorPPEF2027_tourSeen_v3';
 
 const TOUR_STEPS=[
-  {sel:'#state',title:'1. Elige la entidad',text:'Selecciona aquí el estado que quieres analizar. Los indicadores, las gráficas y la tabla se actualizan automáticamente.'},
-  {sel:'#gastoType',title:'2. Elige el tipo de gasto',text:'Selecciona Programable, No programable o Total. La selección define el universo presupuestario que alimenta los indicadores, el gráfico, la dona y la tabla.'},
+  {sel:'#state',title:'1. Elige la entidad',text:'Selecciona aquí el estado que quieres analizar. Los indicadores, las gráficas y las tablas se actualizan automáticamente.'},
+  {sel:'#gastoType',title:'2. Elige el tipo de gasto',text:'Selecciona Programable, No programable o Total. La selección define el universo presupuestario que alimenta los indicadores, el gráfico, la dona y las tablas.'},
   {sel:'#classMode',title:'3. Elige cómo clasificar el gasto',text:'Seleccione cómo desea clasificar el gasto público. Puede analizarlo por ramo presupuestario o mediante la clasificación funcional.'},
   {sel:'.sidebar .ramo-head',title:'4. Elige las categorías',text:'Marca o desmarca los ramos o funciones que quieres comparar. El buscador y “Seleccionar todos” actúan sobre el universo elegido.'},
   {sel:'#rowTotal',title:'Totales y variaciones',text:'Estos indicadores muestran el gasto de tu selección para 2026 y 2027, así como la variación nominal y real.'},
-  {sel:'#rowFedZ',title:'Partición territorial',text:'Aquí comienza el desglose territorial del universo seleccionado. Las filas de gasto federalizado y gasto federal territorializado permiten identificar cómo se integra el resultado sin doble conteo.'},
-  {sel:'.charts .card:nth-child(1)',title:'Gráfico de barras',text:'Compara el PEF 2026 vs 2027 de cada categoría. El neteo o conciliación metodológica no se asigna a un ramo y se identifica debajo del gráfico cuando aplica.'},
-  {sel:'.charts .card:nth-child(2)',title:'Distribución',text:'La dona muestra la composición del PPEF 2027 de tu selección. Cuando existe un ajuste de conciliación negativo, se representa como un espacio para no atribuirlo a ningún ramo.'},
-  {sel:'.table-card',title:'Detalle completo',text:'Aquí tienes el desglose completo, con las variaciones nominal y real y el total seleccionado. La conciliación metodológica aparece como renglón separado cuando corresponde.'}
+  {sel:'#rowFedZ',title:'Gasto federalizado',text:'Aquí se presenta el Gasto Federalizado como un agregado. Incluye varios componentes que puedes consultar por separado.'},
+  {sel:'#fedzBreakdownToggle',title:'Desagregar',text:'Haz clic en “Desagregar” para consultar de qué componentes se integra el Gasto Federalizado y comparar sus montos de 2026 y 2027.'},
+  {sel:'#fedzBreakdownPanel',title:'Desglose del gasto federalizado',text:'Aquí puedes identificar Ramo 28, Ramo 33, Convenios de Descentralización, Ramo 23 federalizado y Salud Pública. Cada apartado tiene un botón ⓘ con su explicación.',onEnter:()=>toggleFederalizedBreakdown(true)},
+  {sel:'#comparativoRamoToggle',title:'Comparativo por Ramo',text:'Este botón agrupa el gráfico de barras, la distribución PPEF 2027 y el detalle por ramo. Ábrelo para consultar todo el bloque de análisis por ramo.',onEnter:()=>toggleCollapsibleSection('comparativoRamoToggle','comparativoRamoPanel',true)},
+  {sel:'#comparativoRamoPanel',title:'Bloque de análisis por Ramo',text:'Aquí se concentran el gráfico de barras, la distribución y la tabla de detalle por ramo.'},
+  {sel:'#detalleFedToggle',title:'Detalle de Gasto Federalizado',text:'Este botón abre la tabla específica del Gasto Federalizado, con sus componentes y el desglose de los Ramos contenidos en Convenios.',onEnter:()=>toggleCollapsibleSection('detalleFedToggle','federalizedDetailPanel',true)},
+  {sel:'#federalizedDetailPanel',title:'Detalle del Gasto Federalizado',text:'Aquí puedes consultar Ramo 28, Ramo 33, Convenios, Ramo 23 y Salud Pública. En Convenios, “Ver Ramos” despliega los Ramos presupuestarios que integran este componente.'}
 ];
 
 let tourIndex=0;
@@ -1456,6 +2167,7 @@ function endTour(remember){
 function showTourStep(){
   const step=TOUR_STEPS[tourIndex];
   if(!step){ endTour(true); return; }
+  if(typeof step.onEnter==='function') step.onEnter();
   const target=document.querySelector(step.sel);
   if(!target){ tourIndex++; showTourStep(); return; }
 
